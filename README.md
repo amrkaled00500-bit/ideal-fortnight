@@ -1,365 +1,172 @@
-<!DOCTYPE html>
+ا
+html_code = '''<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMB - صيانة عمرو عمارة</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-        :root {
-            --primary: #0A2342;
-            --secondary: #2B6CB0;
-            --bg: #F7FAFC;
-            --white: #FFFFFF;
-            --text: #1A202C;
-            --gray: #718096;
-            --success: #48BB78;
-            --warning: #ED8936;
-            --danger: #F56565;
-        }
-        body { background: var(--bg); color: var(--text); max-width: 450px; margin: 0 auto; }
-       .screen { display: none; min-height: 100vh; padding-bottom: 80px; }
-       .screen.active { display: block; animation: fadeIn 0.3s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AMB - المهندس عمرو خالد عمارة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0f17;--card:#111827;--input:#1a2233;--blue:#00a8ff;--blue-glow:rgba(0,168,255,0.15);--green:#25d366;--green-dark:#1da851;--green-glow:rgba(37,211,102,0.2);--text:#ffffff;--text2:#94a3b8;--muted:#64748b;--border:#1e293b;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Cairo',sans-serif;background:#000;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:0;overflow:hidden;}
+.phone{width:100%;max-width:420px;height:100vh;max-height:900px;background:var(--bg);overflow:hidden;position:relative;box-shadow:0 0 60px rgba(0,168,255,0.1),0 20px 60px rgba(0,0,0,0.8);border:1px solid var(--border);}
+@media(min-width:440px){.phone{border-radius:40px;height:812px;}}
+.status{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;color:#fff;font-size:14px;font-weight:600;position:relative;z-index:100;}
+.status-r{display:flex;gap:6px;align-items:center;}
+.page{position:absolute;top:44px;left:0;right:0;bottom:70px;overflow-y:auto;overflow-x:hidden;opacity:0;pointer-events:none;transform:translateX(30px);transition:all .35s cubic-bezier(.4,0,.2,1);padding:0 16px 20px;}
+.page::-webkit-scrollbar{display:none;}
+.page.active{opacity:1;pointer-events:all;transform:translateX(0);}
+.page.exit{opacity:0;transform:translateX(-30px);}
+.ph{display:flex;align-items:center;justify-content:center;height:52px;position:relative;margin-bottom:8px;}
+.back{position:absolute;right:0;top:50%;transform:translateY(-50%);width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;cursor:pointer;border-radius:10px;transition:background .2s;}
+.back:hover{background:rgba(255,255,255,.05);}
+.pt{font-size:17px;font-weight:700;color:#fff;}
+.ps{text-align:center;color:var(--blue);font-size:12px;font-weight:600;margin-bottom:20px;}
 
-        /* Splash Screen */
-        #splash { background: var(--primary); color: var(--white); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        #splash.active { display: flex; }
-       .logo { font-size: 60px; font-weight: 700; margin-bottom: 10px; }
-       .logo span { color: var(--secondary); }
-       .splash-text { font-size: 18px; margin: 10px 0; }
-       .loading-dots { display: flex; gap: 8px; margin-top: 40px; }
-       .loading-dots span { width: 10px; height: 10px; background: var(--white); border-radius: 50%; animation: bounce 1.4s infinite; }
-       .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-       .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+/* Home */
+.ht{display:flex;align-items:center;justify-content:space-between;padding:8px 4px 16px;}
+.hb{background:none;border:none;color:#fff;cursor:pointer;padding:4px;}
+.lb{background:linear-gradient(135deg,#0a1628,#0d1f3c);border:2px solid var(--blue);border-radius:14px;padding:10px 28px;box-shadow:0 0 20px rgba(0,168,255,.2),inset 0 1px 0 rgba(255,255,255,.05);}
+.lt{font-size:26px;font-weight:900;color:#fff;letter-spacing:2px;text-shadow:0 0 10px rgba(0,168,255,.5);}
+.htl{text-align:center;margin-top:12px;}
+.htl h1{font-size:18px;font-weight:800;color:#fff;line-height:1.4;}
+.htl p{font-size:13px;color:var(--blue);font-weight:600;margin-top:4px;}
 
-        /* Header */
-       .header { background: var(--white); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-       .header-title { font-size: 18px; font-weight: 600; }
-       .header-icon { font-size: 22px; color: var(--primary); cursor: pointer; }
+/* Cards */
+.sc{background:linear-gradient(135deg,#0f1724,#141d2e);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,168,255,.3),transparent);}
+.sc:hover{border-color:rgba(0,168,255,.3);transform:translateY(-1px);box-shadow:0 8px 30px rgba(0,0,0,.4);}
+.sci{flex:1;}
+.sc h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+.dp{width:7px;height:7px;background:var(--blue);border-radius:50%;box-shadow:0 0 8px var(--blue);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+.sc p{font-size:11px;color:var(--text2);line-height:1.5;}
+.sc img{width:60px;height:60px;border-radius:12px;object-fit:cover;margin-right:12px;border:1px solid rgba(0,168,255,.15);}
 
-        /* Home */
-       .welcome-card { background: var(--primary); color: var(--white); margin: 20px; padding: 20px; border-radius: 16px; }
-       .welcome-card h2 { font-size: 22px; margin-bottom: 5px; }
-       .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; margin-top: 20px; }
-       .service-card { background: var(--white); padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); cursor: pointer; }
-       .service-card i { font-size: 32px; color: var(--secondary); margin-bottom: 10px; }
-       .service-card p { font-weight: 600; font-size: 14px; }
-       .discount-card { background: var(--primary); color: var(--white); margin: 20px; padding: 20px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; }
-       .discount-code { background: var(--white); color: var(--primary); padding: 8px 15px; border-radius: 8px; font-weight: 700; }
+.cc{background:linear-gradient(135deg,#0a1628,#0d1f3c);border:1px solid rgba(0,168,255,.15);border-radius:16px;padding:18px;margin-top:8px;margin-bottom:16px;display:flex;align-items:center;gap:14px;cursor:pointer;}
+.cci{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,rgba(0,168,255,.1),rgba(0,168,255,.05));border:1px solid rgba(0,168,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cc h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:3px;}
+.cc p{font-size:11px;color:var(--text2);}
 
-        /* Form */
-       .form-container { padding: 20px; }
-       .stepper { display: flex; justify-content: space-between; margin-bottom: 30px; }
-       .step { text-align: center; flex: 1; position: relative; }
-       .step::after { content: ''; position: absolute; top: 15px; right: -50%; width: 100%; height: 2px; background: #E2E8F0; z-index: -1; }
-       .step:last-child::after { display: none; }
-       .step-circle { width: 30px; height: 30px; border-radius: 50%; background: #E2E8F0; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-weight: 600; }
-       .step.active.step-circle { background: var(--secondary); color: var(--white); }
-       .step.done.step-circle { background: var(--success); color: var(--white); }
-       .form-group { margin-bottom: 20px; }
-       .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
-       .form-group input,.form-group select,.form-group textarea { width: 100%; padding: 12px 15px; border: 1px solid #E2E8F0; border-radius: 10px; font-size: 15px; }
-       .device-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-       .device-option { border: 2px solid #E2E8F0; border-radius: 10px; padding: 15px 10px; text-align: center; cursor: pointer; }
-       .device-option.selected { border-color: var(--secondary); background: #EBF8FF; }
-       .device-option i { font-size: 28px; color: var(--secondary); margin-bottom: 5px; }
-       .btn { width: 100%; padding: 15px; background: var(--secondary); color: var(--white); border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; }
+.wb{width:100%;background:linear-gradient(135deg,var(--green),var(--green-dark));border:none;border-radius:14px;padding:14px 20px;color:#fff;font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 20px var(--green-glow),0 2px 8px rgba(0,0,0,.3);transition:all .2s;margin-bottom:12px;}
+.wb:hover{transform:translateY(-2px);box-shadow:0 6px 28px var(--green-glow),0 4px 12px rgba(0,0,0,.3);}
+.wb svg{width:22px;height:22px;}
 
-        /* Orders */
-       .tabs { display: flex; background: var(--white); margin: 20px; border-radius: 12px; padding: 5px; }
-       .tab { flex: 1; padding: 10px; text-align: center; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; }
-       .tab.active { background: var(--secondary); color: var(--white); }
-       .order-card { background: var(--white); margin: 0 20px 15px; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-       .order-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
-       .status { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-       .status.ongoing { background: #FEF5E7; color: var(--warning); }
-       .status.done { background: #E6FFFA; color: var(--success); }
-       .status.cancelled { background: #FFF5F5; color: var(--danger); }
+/* Nav */
+.bn{position:absolute;bottom:0;left:0;right:0;height:70px;background:linear-gradient(180deg,transparent 0%,var(--bg) 20%);backdrop-filter:blur(20px);display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--border);z-index:100;}
+.ni{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:8px 12px;border-radius:12px;transition:all .2s;color:var(--muted);}
+.ni.active{color:var(--blue);}
+.ni:hover{color:#fff;}
+.ni svg{width:22px;height:22px;}
+.ni span{font-size:10px;font-weight:600;}
 
-        /* Bottom Nav */
-       .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 450px; background: var(--white); display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.08); }
-       .nav-item { text-align: center; color: var(--gray); cursor: pointer; }
-       .nav-item.active { color: var(--secondary); }
-       .nav-item i { font-size: 22px; display: block; margin-bottom: 4px; }
-       .nav-item span { font-size: 11px; font-weight: 600; }
+/* Service list */
+.sli{background:linear-gradient(135deg,#0f1724,#141d2e);border:1px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;cursor:pointer;transition:all .2s;}
+.sli:hover{border-color:rgba(0,168,255,.2);}
+.sli h4{font-size:14px;font-weight:700;color:#fff;}
+.sli p{font-size:11px;color:var(--text2);margin-top:2px;}
+.slic{width:44px;height:44px;border-radius:10px;background:rgba(0,168,255,.08);border:1px solid rgba(0,168,255,.15);display:flex;align-items:center;justify-content:center;color:var(--blue);}
+.slic svg{width:22px;height:22px;}
 
-        /* Sidebar */
-       .sidebar { position: fixed; top: 0; right: -100%; width: 80%; max-width: 350px; height: 100vh; background: var(--primary); color: var(--white); z-index: 1000; transition: 0.3s; overflow-y: auto; }
-       .sidebar.active { right: 0; }
-       .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); display: none; z-index: 999; }
-       .sidebar-overlay.active { display: block; }
-       .sidebar-profile { padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
-       .sidebar-profile img { width: 70px; height: 70px; border-radius: 50%; margin-bottom: 10px; }
-       .sidebar-menu { padding: 20px 0; }
-       .menu-item { padding: 15px 25px; display: flex; align-items: center; gap: 15px; cursor: pointer; }
-       .menu-item:hover { background: rgba(255,255,255,0.1); }
+/* Form */
+.fg{margin-bottom:12px;}
+.fl{display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--text2);font-size:12px;font-weight:600;}
+.fl svg{width:16px;height:16px;color:var(--muted);}
+.fi,.fs,.ft{width:100%;background:var(--input);border:1px solid var(--border);border-radius:12px;padding:14px 16px;color:#fff;font-family:'Cairo',sans-serif;font-size:13px;outline:none;transition:all .2s;}
+.fi:focus,.fs:focus,.ft:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow);}
+.fi::placeholder{color:var(--muted);}
+.fs{appearance:none;cursor:pointer;}
+.fs option{background:var(--bg);color:#fff;}
+.ft{min-height:90px;resize:none;}
+.sw{position:relative;}
+.sw::after{content:'▼';position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:10px;pointer-events:none;}
 
-       .features { padding: 20px; }
-       .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-       .feature-item { background: var(--white); padding: 15px; border-radius: 12px; text-align: center; }
-       .feature-item i { font-size: 28px; color: var(--secondary); margin-bottom: 8px; }
-    </style>
+/* Timeline */
+.tl{padding:10px 8px;}
+.ti{display:flex;gap:14px;position:relative;padding-bottom:24px;}
+.ti:last-child{padding-bottom:0;}
+.ti:not(:last-child)::before{content:'';position:absolute;right:15px;top:32px;bottom:0;width:2px;background:linear-gradient(180deg,var(--blue),transparent);opacity:.3;}
+.td{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:2;position:relative;}
+.td.d{background:linear-gradient(135deg,var(--green),var(--green-dark));box-shadow:0 0 12px var(--green-glow);}
+.td.a{background:linear-gradient(135deg,var(--blue),#0077cc);box-shadow:0 0 15px rgba(0,168,255,.4);animation:gp 2s infinite;}
+@keyframes gp{0%,100%{box-shadow:0 0 15px rgba(0,168,255,.4);}50%{box-shadow:0 0 25px rgba(0,168,255,.7);}}
+.td.p{background:var(--input);border:2px solid var(--border);}
+.tc h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;}
+.tc p{font-size:11px;color:var(--text2);}
+
+/* About */
+.al{text-align:center;margin:8px 0 20px;}
+.al .lb{display:inline-block;margin-bottom:12px;}
+.al h2{font-size:17px;font-weight:800;color:#fff;}
+.al p{font-size:12px;color:var(--blue);font-weight:600;margin-top:4px;}
+.fc{background:linear-gradient(135deg,#0f1724,#141d2e);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+.fi2{width:44px;height:44px;border-radius:12px;background:rgba(0,168,255,.08);border:1px solid rgba(0,168,255,.15);display:flex;align-items:center;justify-content:center;color:var(--blue);flex-shrink:0;}
+.fi2 svg{width:22px;height:22px;}
+.fc p{font-size:13px;font-weight:600;color:#fff;}
+
+/* Terms */
+.tr{padding:8px 4px;}
+.ti2{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;padding-right:4px;}
+.tb{width:6px;height:6px;background:var(--blue);border-radius:50%;margin-top:8px;flex-shrink:0;box-shadow:0 0 6px var(--blue);}
+.ti2 p{font-size:13px;color:var(--text2);line-height:1.7;}
+.ti2 p strong{color:#fff;font-weight:700;}
+.ab{width:100%;background:linear-gradient(135deg,var(--green),var(--green-dark));border:none;border-radius:14px;padding:14px 20px;color:#fff;font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 20px var(--green-glow);transition:all .2s;margin-top:8px;}
+.ab:hover{transform:translateY(-2px);}
+
+/* Contact */
+.ct{text-align:center;padding-top:40px;}
+.wbi{width:100px;height:100px;margin:0 auto 24px;background:linear-gradient(135deg,var(--green),var(--green-dark));border-radius:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px var(--green-glow),0 8px 30px rgba(0,0,0,.3);}
+.wbi svg{width:52px;height:52px;}
+.ct h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.ct p{font-size:13px;color:var(--text2);margin-bottom:24px;}
+.pn{font-size:20px;font-weight:800;color:var(--green);direction:ltr;display:inline-flex;align-items:center;gap:8px;margin-top:8px;}
+.pl{font-size:12px;color:var(--muted);margin-top:16px;}
+
+/* Success */
+.su{text-align:center;padding-top:60px;}
+.sc2{width:100px;height:100px;margin:0 auto 28px;border-radius:50%;background:linear-gradient(135deg,rgba(37,211,102,.1),rgba(37,211,102,.05));border:2px solid var(--green);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px var(--green-glow);}
+.sc2 svg{width:48px;height:48px;color:var(--green);}
+.su h2{font-size:20px;font-weight:800;color:#fff;margin-bottom:10px;}
+.su p{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:32px;}
+</style>
 </head>
 <body>
-    <!-- Splash Screen -->
-    <div id="splash" class="screen active">
-        <div class="logo">AMB</div>
-        <div class="splash-text">صيانة عمرو عمارة</div>
-        <div style="font-size: 14px; opacity: 0.8;">صيانة الثلاجات والغسالات</div>
-        <div class="loading-dots"><span></span><span></span></div>
-        <div style="margin-top: 20px; font-size: 14px;">جاري التحميل...</div>
-    </div>
+<div class="phone" id="app">
+<div class="status"><span>12:30</span><div class="status-r"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg><svg width="20" height="12" viewBox="0 0 24 12" fill="currentColor"><rect x="2" y="2" width="18" height="8" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><rect x="4" y="4" width="14" height="4" rx="1" fill="currentColor"/></svg></div></div>
 
-    <!-- Home Screen -->
-    <div id="home" class="screen">
-        <div class="header">
-            <i class="fas fa-bars header-icon" onclick="toggleSidebar()"></i>
-            <div class="header-title">القاهرة، مصر <i class="fas fa-map-marker-alt"></i></div>
-            <i class="fas fa-bell header-icon"></i>
-        </div>
+<!-- PAGE 1: HOME -->
+<div class="page active" id="p-home">
+<div class="ht"><button class="hb" onclick="go('terms')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><div class="lb"><span class="lt">AMB</span></div><button class="hb" onclick="go('contact')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button></div>
+<div class="htl"><h1>المهندس عمرو خالد عمارة</h1><p>لصيانة الثلاجات والغسالات فقط</p></div>
+<div style="margin-top:20px;">
+<div class="sc" onclick="go('fridge')"><div class="sci"><h3>صيانة ثلاجات <span class="dp"></span></h3><p>ثلاجات نوفروست، ديفروست، سايد باي سايد، عرض</p></div><img src="https://images.unsplash.com/photo-1571175443880-49e1d58b794a?w=120&h=120&fit=crop" alt="ثلاجة"></div>
+<div class="sc" onclick="go('washer')"><div class="sci"><h3>صيانة غسالات <span class="dp"></span></h3><p>غسالات أوتوماتيك، فوق أوتوماتيك، أطباق</p></div><img src="https://images.unsplash.com/photo-1626806775351-538068a21838?w=120&h=120&fit=crop" alt="غسالة"></div>
+<div class="cc" onclick="go('contact')"><div class="cci"><svg viewBox="0 0 24 24" fill="none" stroke="#00a8ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><h3>تواصل معنا</h3><p>جميع المعلومات والحجوزات على واتساب</p></div></div>
+<button class="wb" onclick="wa()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>استفسار عبر واتساب</button>
+</div></div>
 
-        <div class="welcome-card">
-            <h2>👋 أهلاً بك</h2>
-            <p>نحن هنا لخدمتك في أي وقت</p>
-        </div>
+<!-- PAGE 2: FRIDGE -->
+<div class="page" id="p-fridge">
+<div class="ph"><div class="back" onclick="go('home')">›</div><span class="pt">صيانة الثلاجات</span></div>
+<p class="ps">نقدم جميع خدمات صيانة الثلاجات</p>
+<div class="sli"><div><h4>ثلاجات نوفروست</h4><p>صيانة جميع الأعطال</p></div><div class="slic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/></svg></div></div>
+<div class="sli"><div><h4>ثلاجات ديفروست</h4><p>صيانة جميع الأعطال</p></div><div class="slic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><circle cx="12" cy="14" r="2"/></svg></div></div>
+<div class="sli"><div><h4>ثلاجات سايد باي سايد</h4><p>صيانة جميع الأعطال</p></div><div class="slic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg></div></div>
+<div class="sli"><div><h4>ثلاجات عرض</h4><p>صيانة جميع الأعطال</p></div><div class="slic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div></div>
+<button class="wb" style="margin-top:8px;" onclick="wa()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>احجز الآن عبر واتساب</button>
+</div>
 
-        <h3 style="padding: 0 20px; margin-top: 20px;">الخدمات</h3>
-        <div class="services-grid">
-            <div class="service-card" onclick="showScreen('new-order')">
-                <i class="fas fa-tools"></i>
-                <p>طلب صيانة</p>
-                <small>اطلب فني الآن</small>
-            </div>
-            <div class="service-card" onclick="showScreen('track')">
-                <i class="fas fa-map-marked-alt"></i>
-                <p>متابعة الطلب</p>
-                <small>تتبع حالة طلبك</small>
-            </div>
-            <div class="service-card">
-                <i class="fab fa-whatsapp"></i>
-                <p>واتساب</p>
-                <small>تواصل معنا</small>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-phone"></i>
-                <p>اتصل بنا</p>
-                <small>خدمة العملاء</small>
-            </div>
-        </div>
+<!-- PAGE 3: WASHER -->
+<div class="page" id="p-washer">
+<div class="ph"><div class="back" onclick="go('home')">›</div><span class="pt">صيانة الغسالات</span></div>
+<p class="ps">نقدم جميع خدمات صيانة الغسالات</p>
+<div class="sli"><div><h4>غسالات أوتوماتيك</h4><p>صيانة جميع الأعطال</p></div><div class="slic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="20" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M12 3v3"/></svg></div></div>
+<div class="sli"><div><h4>غسالات فوق أوتوماتيك</h4><p>صيانة جميع الأعطال</p></div><div class="slic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="6" width="16" height="14" rx="2"/><line x1="4" y1="11" x2="20" y2="11"/></svg></div></div>
+<div class="sli"><div><h4>غسالات أطباق</h4><p>صيانة جميع الأعطال</p></div><div class="slic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="7" y1="4" x2="7" y2="9"/><line x1="17" y1="4" x2="17" y2="9"/></svg></div></div>
+<button class="wb" style="margin-top:8px;" onclick="wa()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>احجز الآن عبر واتساب</button>
+</div>
 
-        <div class="discount-card">
-            <div>
-                <h3>خصم 20%</h3>
-                <p style="font-size: 13px; opacity: 0.9;">على أول طلب صيانة</p>
-            </div>
-            <div class="discount-code">AMB20</div>
-        </div>
-
-        <div class="features">
-            <h3 style="margin-bottom: 15px;">مميزات التطبيق</h3>
-            <div class="features-grid">
-                <div class="feature-item"><i class="fas fa-map-marker-alt"></i><p>تتبع مباشر لموقع الفني</p></div>
-                <div class="feature-item"><i class="fas fa-clock"></i><p>تقدير وقت الوصول بدقة</p></div>
-                <div class="feature-item"><i class="fas fa-bell"></i><p>إشعارات فورية لحالة الطلب</p></div>
-                <div class="feature-item"><i class="fas fa-headset"></i><p>دعم فني على مدار الساعة</p></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- New Order Screen -->
-    <div id="new-order" class="screen">
-        <div class="header">
-            <i class="fas fa-arrow-right header-icon" onclick="showScreen('home')"></i>
-            <div class="header-title">طلب صيانة</div>
-            <div></div>
-        </div>
-
-        <div class="form-container">
-            <div class="stepper">
-                <div class="step active"><div class="step-circle">1</div><small>بيانات الطلب</small></div>
-                <div class="step"><div class="step-circle">2</div><small>تحديد العطل</small></div>
-                <div class="step"><div class="step-circle">3</div><small>تأكيد الطلب</small></div>
-            </div>
-
-            <h3>بيانات العميل</h3>
-            <div class="form-group">
-                <label>الاسم الكامل</label>
-                <input type="text" placeholder="ادخل اسمك بالكامل">
-            </div>
-            <div class="form-group">
-                <label>رقم الهاتف</label>
-                <input type="tel" placeholder="ادخل رقم هاتفك">
-            </div>
-            <div class="form-group">
-                <label>العنوان</label>
-                <input type="text" placeholder="ادخل عنوانك بالتفصيل">
-            </div>
-
-            <h3 style="margin-top: 25px;">نوع الجهاز</h3>
-            <div class="device-grid">
-                <div class="device-option selected" onclick="selectDevice(this)">
-                    <i class="fas fa-th-large"></i>
-                    <p>ثلاجة</p>
-                </div>
-                <div class="device-option" onclick="selectDevice(this)">
-                    <i class="fas fa-soap"></i>
-                    <p>غسالة</p>
-                </div>
-                <div class="device-option" onclick="selectDevice(this)">
-                    <i class="fas fa-snowflake"></i>
-                    <p>ديب فريزر</p>
-                </div>
-            </div>
-
-            <div class="form-group" style="margin-top: 20px;">
-                <label>نوع العطل</label>
-                <select><option>اختر نوع العطل</option><option>لا تبرد</option><option>صوت عالي</option><option>تسريب مياه</option></select>
-            </div>
-
-            <div class="form-group">
-                <label>وصف العطل (اختياري)</label>
-                <textarea rows="3" placeholder="اكتب وصف مختصر عن العطل"></textarea>
-            </div>
-
-            <button class="btn" onclick="showScreen('track')">التالي</button>
-        </div>
-    </div>
-
-    <!-- Track Order Screen -->
-    <div id="track" class="screen">
-        <div class="header">
-            <i class="fas fa-arrow-right header-icon" onclick="showScreen('home')"></i>
-            <div class="header-title">متابعة الطلب</div>
-            <div></div>
-        </div>
-
-        <div style="padding: 20px;">
-            <div class="order-card">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                    <div>
-                        <p style="font-size: 13px; color: var(--gray);">رقم الطلب</p>
-                        <h3>#1258</h3>
-                    </div>
-                    <div style="text-align: left;">
-                        <p style="font-size: 13px; color: var(--gray);">حالة الطلب</p>
-                        <h3 style="color: var(--warning);">جاري التوجه إليك</h3>
-                    </div>
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <img src="https://i.pravatar.cc/60" style="width: 50px; height: 50px; border-radius: 50%;">
-                    <div>
-                        <p style="font-weight: 600;">أحمد محمد</p>
-                        <p style="font-size: 13px; color: var(--gray);">⭐ 4.9</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="background: #E2E8F0; height: 200px; border-radius: 12px; margin: 20px 0; display: flex; align-items: center; justify-content: center; color: var(--gray);">
-                <i class="fas fa-map-marked-alt" style="font-size: 40px;"></i>
-                <p style="margin-right: 10px;">متبقي 15 دقيقة</p>
-            </div>
-
-            <button class="btn"><i class="fas fa-phone"></i> تواصل مع الفني</button>
-        </div>
-    </div>
-
-    <!-- Orders Screen -->
-    <div id="orders" class="screen">
-        <div class="header">
-            <i class="fas fa-arrow-right header-icon" onclick="showScreen('home')"></i>
-            <div class="header-title">طلباتي</div>
-            <div></div>
-        </div>
-
-        <div class="tabs">
-            <div class="tab active">الكل</div>
-            <div class="tab">جارية</div>
-            <div class="tab">مكتملة</div>
-            <div class="tab">ملغية</div>
-        </div>
-
-        <div class="order-card">
-            <div class="order-header">
-                <span>#1258</span>
-                <span class="status ongoing">جاري التوجه</span>
-            </div>
-            <p style="font-weight: 600;">ثلاجة - لا تبرد من الأسفل</p>
-            <p style="font-size: 13px; color: var(--gray); margin-top: 5px;"><i class="far fa-clock"></i> 21 يونيو 2024 - 02:30 م</p>
-        </div>
-
-        <div class="order-card">
-            <div class="order-header">
-                <span>#1256</span>
-                <span class="status done">مكتمل</span>
-            </div>
-            <p style="font-weight: 600;">غسالة - لا تشطف الملابس</p>
-            <p style="font-size: 13px; color: var(--gray); margin-top: 5px;"><i class="far fa-clock"></i> 18 يونيو 2024 - 11:00 ص</p>
-        </div>
-    </div>
-
-    <!-- Sidebar -->
-    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
-    <div class="sidebar">
-        <div class="sidebar-profile">
-            <img src="https://i.pravatar.cc/100" alt="profile">
-            <h3>أحمد محمد</h3>
-            <p style="opacity: 0.8; font-size: 14px;">010 1234 5678</p>
-        </div>
-        <div class="sidebar-menu">
-            <div class="menu-item" onclick="showScreen('home'); toggleSidebar();"><i class="fas fa-home"></i><span>الرئيسية</span></div>
-            <div class="menu-item" onclick="showScreen('new-order'); toggleSidebar();"><i class="fas fa-plus-circle"></i><span>طلب صيانة</span></div>
-            <div class="menu-item" onclick="showScreen('orders'); toggleSidebar();"><i class="fas fa-list"></i><span>طلباتي</span></div>
-            <div class="menu-item"><i class="fas fa-tag"></i><span>العروض والخصومات</span></div>
-            <div class="menu-item"><i class="fas fa-comments"></i><span>الدردشة</span></div>
-            <div class="menu-item"><i class="fas fa-star"></i><span>تقييم الخدمة</span></div>
-            <div class="menu-item"><i class="fas fa-question-circle"></i><span>الأسئلة الشائعة</span></div>
-            <div class="menu-item"><i class="fas fa-cog"></i><span>الإعدادات</span></div>
-            <div class="menu-item" style="color: #FC8181;"><i class="fas fa-sign-out-alt"></i><span>تسجيل خروج</span></div>
-        </div>
-    </div>
-
-    <!-- Bottom Nav -->
-    <div class="bottom-nav">
-        <div class="nav-item" onclick="showScreen('home')">
-            <i class="fas fa-home"></i><span>الرئيسية</span>
-        </div>
-        <div class="nav-item" onclick="showScreen('orders')">
-            <i class="fas fa-clipboard-list"></i><span>الطلبات</span>
-        </div>
-        <div class="nav-item">
-            <i class="fas fa-comments"></i><span>الدردشة</span>
-        </div>
-        <div class="nav-item">
-            <i class="fas fa-user"></i><span>الحساب</span>
-        </div>
-    </div>
-
-    <script>
-        // Show splash then home
-        setTimeout(() => { showScreen('home'); }, 2000);
-
-        function showScreen(id) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-
-            // Update bottom nav
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            if(id === 'home') document.querySelectorAll('.nav-item')[0].classList.add('active');
-            if(id === 'orders') document.querySelectorAll('.nav-item')[1].classList.add('active');
-        }
-
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            document.querySelector('.sidebar-overlay').classList.toggle('active');
-        }
-
-        function selectDevice(el) {
-            document.querySelectorAll('.device-option').forEach(d => d.classList.remove('selected'));
-            el.classList.add('selected');
-        }
-    </script>
-</body>
-</html>
+<!-- PAGE 4: REQUEST -->
+<div class="page" id="p-request">
+<div class="ph"><div class="back" onclick="go('home')">›</div><span cla
